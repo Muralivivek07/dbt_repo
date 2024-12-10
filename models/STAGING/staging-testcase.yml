@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "{{ doc('products') }}"
+    columns:
+      - name: productid
+        description: "{{ doc('products') }}"
+
+        tests:
+          - unique
+          - not_null
+      - name: productname
+        tests:
+          - not_null
+
+  - name: stg_shipments
+    description: Shipment  data loading from shipment source file
+    columns:
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['shipped',  'returned','ordered','replaced']
+  - name: stg_orderdetails
+    description: Orderdetails data loading from Order source file
+    columns:
+      - name: orderid
+        tests:
+          - relationships:
+              field: orderid
+              to: ref('stg_orders')
+  - name: stg_customers
+    description: Customer master data loading from customer  source file
+    columns:
+      - name: customerid
+        tests:
+          - unique
