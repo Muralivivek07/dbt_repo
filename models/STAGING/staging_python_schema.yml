@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: stg_customers_python
+    config:
+      schema: "{{env_var('DBT_SOURCESCHEMA','STAGING_DEV')}}"
+
+  - name: stg_orders_python
+    config:
+      schema: "{{env_var('DBT_SOURCESCHEMA','STAGING_DEV')}}"
